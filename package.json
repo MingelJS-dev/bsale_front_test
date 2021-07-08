@@ -1,0 +1,12 @@
+{
+  "name": "front_bsale_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server ./src/views"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
