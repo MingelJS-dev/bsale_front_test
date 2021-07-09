@@ -1,0 +1,10 @@
+.discount {
+    position: absolute;
+    z-index: 200;
+    top: 5;
+    right: 20;
+    padding: 5px;
+    border-radius: 50px;
+    background: #54080f !important;
+    color: white;
+  }
