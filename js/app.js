@@ -1,5 +1,3 @@
-
-
 const btnSearch = document.getElementById("btnSearch")
 const fieldSearch = document.getElementById("fieldSearch")
 const categories = document.getElementById('categories')
@@ -100,7 +98,7 @@ const drawCards = (data) => {
 
             templateCard.querySelector('h5').textContent = product.name
             templateCard.querySelector('h6').textContent = formatter.format(product.price)
-            templateCard.querySelector('img').setAttribute('src', product.url_image ? product.url_image : './no-image.jpg')
+            templateCard.querySelector('img').setAttribute('src', product.url_image ? product.url_image : 'assets/no-image.jpg')
 
             const clone = templateCard.cloneNode(true)
             fragmentTwo.appendChild(clone)

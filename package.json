@@ -2,10 +2,8 @@
   "name": "front_bsale_test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "live-server ./public/views"
-  },
+  "main": "index.html",
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC"
