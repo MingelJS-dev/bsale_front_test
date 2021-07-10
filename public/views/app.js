@@ -49,6 +49,20 @@ const getCategoriesWithProducts = async (filter) => {
     }
 }
 
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 1
+});
+
+const getDiscountPrice = ({ discount, price }) => {
+    const percentage = (100 - discount) / 100
+
+    return formatter.format(percentage * price)
+}
+
+
+
 const drawAccordions = (data) => {
     categories.innerHTML = ''
     data.map(category => {
@@ -71,9 +85,21 @@ const drawCards = (data) => {
         const products = document.getElementById(`products-${category.id}`)
         products.innerHTML = ''
         category.products.map(product => {
-            templateCard.querySelector('span').textContent = `Descuento: ${product.discount}%`
+
+            if (product.discount > 0) {
+                templateCard.querySelector('.discount').style.opacity = `1`
+                templateCard.querySelector('span').textContent = `-${product.discount}%`
+                templateCard.getElementById('price').textContent = getDiscountPrice(product)
+                templateCard.querySelector('h6').style.textDecoration = 'line-through'
+            } else {
+                templateCard.querySelector('.discount').style.opacity = `0`
+                templateCard.querySelector('span').textContent = ''
+                templateCard.querySelector('h6').style.textDecoration = ''
+                templateCard.getElementById('price').textContent = ''
+            }
+
             templateCard.querySelector('h5').textContent = product.name
-            templateCard.querySelector('h6').textContent = `$ ${product.price}`
+            templateCard.querySelector('h6').textContent = formatter.format(product.price)
             templateCard.querySelector('img').setAttribute('src', product.url_image ? product.url_image : './no-image.jpg')
 
             const clone = templateCard.cloneNode(true)
