@@ -8,7 +8,7 @@ const templateCard = document.getElementById('template-card').content
 const fragment = document.createDocumentFragment();
 const fragmentTwo = document.createDocumentFragment();
 
-const url = 'http://localhost:3000/'
+const url = 'https://bsale-back19.herokuapp.com/'
 
 document.addEventListener('DOMContentLoaded', () => {
     getCategoriesWithProducts()
