@@ -66,12 +66,12 @@ const getDiscountPrice = ({ discount, price }) => {
 const drawAccordions = (data, show ) => {
     categories.innerHTML = ''
     const CategoryId = data[0].id
+    console.log(CategoryId, show)
     data.map((category, idx) => {
         templateAccordion.querySelector('h4').textContent = category.name.toUpperCase()
         templateAccordion.querySelector('#btn-accordion').setAttribute('data-bs-target', `#flush-${category.id}`);
         templateAccordion.querySelector('.flush').setAttribute('id', `flush-${category.id}`);
         templateAccordion.querySelector('.accordion-body').setAttribute('id', `products-${category.id}`);
-
         if (CategoryId === category.id && show) {
             templateAccordion.querySelector('.flush').setAttribute('class', `flush accordion-collapse collapse show`);
         } else {
