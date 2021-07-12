@@ -14,13 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 btnSearch.addEventListener('click', () => {
     const filter = fieldSearch.value
-    getCategoriesWithProducts(filter)
+    const show = fieldSearch.value ? true : false
+    getCategoriesWithProducts(filter, show)
 })
 
 fieldSearch.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         const filter = fieldSearch.value
-        getCategoriesWithProducts(filter)
+        const show = fieldSearch.value ? true : false
+        getCategoriesWithProducts(filter, show)
 
     }
 })
@@ -35,13 +37,13 @@ const getProducts = async () => {
     }
 }
 
-const getCategoriesWithProducts = async (filter) => {
+const getCategoriesWithProducts = async (filter, show = false) => {
     try {
         const query = filter ? `?filter=${filter}` : ''
         const res = await fetch(url + 'categories/group' + query)
         const { result } = await res.json()
 
-        drawAccordions(result)
+        drawAccordions(result, show)
     } catch (error) {
         console.log('Error', error)
     }
@@ -61,13 +63,20 @@ const getDiscountPrice = ({ discount, price }) => {
 
 
 
-const drawAccordions = (data) => {
+const drawAccordions = (data, show ) => {
     categories.innerHTML = ''
-    data.map(category => {
+    const CategoryId = data[0].id
+    data.map((category, idx) => {
         templateAccordion.querySelector('h4').textContent = category.name.toUpperCase()
         templateAccordion.querySelector('#btn-accordion').setAttribute('data-bs-target', `#flush-${category.id}`);
         templateAccordion.querySelector('.flush').setAttribute('id', `flush-${category.id}`);
         templateAccordion.querySelector('.accordion-body').setAttribute('id', `products-${category.id}`);
+
+        if (CategoryId === category.id && show) {
+            templateAccordion.querySelector('.flush').setAttribute('class', `flush accordion-collapse collapse show`);
+        } else {
+            templateAccordion.querySelector('.flush').setAttribute('class', `flush accordion-collapse collapse`);
+        }
 
         const clone = templateAccordion.cloneNode(true)
 
